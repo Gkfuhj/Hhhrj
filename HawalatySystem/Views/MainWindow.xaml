@@ -1,0 +1,222 @@
+<Window x:Class="HawalatySystem.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Hawalaty System - TurkeyLibya Transfer System"
+        Height="800" Width="1400"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <materialDesign:ColorZone Grid.Row="0" 
+                                Mode="PrimaryMid" 
+                                Padding="16"
+                                materialDesign:ElevationAssist.Elevation="Dp4">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                    <materialDesign:PackIcon Kind="BankTransfer" 
+                                           Width="32" Height="32" 
+                                           VerticalAlignment="Center"
+                                           Foreground="White"
+                                           Margin="0,0,16,0"/>
+                    <TextBlock Text="{Binding Title}" 
+                             VerticalAlignment="Center"
+                             Foreground="White"
+                             FontSize="20"
+                             FontWeight="Medium"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" 
+                           DockPanel.Dock="Right"
+                           HorizontalAlignment="Right">
+                    
+                    <!-- Language Switcher -->
+                    <ComboBox x:Name="LanguageComboBox"
+                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                             Width="120"
+                             Margin="0,0,16,0"
+                             materialDesign:ColorZoneAssist.Mode="Light"
+                             SelectedIndex="0"
+                             SelectionChanged="LanguageComboBox_SelectionChanged">
+                        <ComboBoxItem Content="English"/>
+                        <ComboBoxItem Content="العربية"/>
+                    </ComboBox>
+
+                    <!-- User Info -->
+                    <TextBlock Text="{Binding CurrentUserName}" 
+                             VerticalAlignment="Center"
+                             Foreground="White"
+                             Margin="0,0,16,0"/>
+                    
+                    <!-- Logout Button -->
+                    <Button Content="{Binding LogoutText}"
+                           Style="{StaticResource MaterialDesignOutlinedButton}"
+                           materialDesign:ButtonAssist.CornerRadius="16"
+                           Command="{Binding LogoutCommand}"
+                           Foreground="White"
+                           BorderBrush="White"/>
+                </StackPanel>
+            </DockPanel>
+        </materialDesign:ColorZone>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Navigation Menu -->
+            <materialDesign:ColorZone Grid.Column="0" 
+                                    Mode="Light"
+                                    materialDesign:ElevationAssist.Elevation="Dp2">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="0,16,0,16">
+                        
+                        <!-- Dashboard -->
+                        <Button x:Name="DashboardButton"
+                               Style="{StaticResource MaterialDesignFlatButton}"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Left"
+                               Padding="16,12"
+                               Click="NavigationButton_Click"
+                               Tag="Dashboard">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ViewDashboard" 
+                                                       Width="20" Height="20" 
+                                                       Margin="0,0,16,0"/>
+                                <TextBlock Text="{Binding DashboardText}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Transfers -->
+                        <Button x:Name="TransfersButton"
+                               Style="{StaticResource MaterialDesignFlatButton}"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Left"
+                               Padding="16,12"
+                               Click="NavigationButton_Click"
+                               Tag="Transfers">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="SwapHorizontal" 
+                                                       Width="20" Height="20" 
+                                                       Margin="0,0,16,0"/>
+                                <TextBlock Text="{Binding TransfersText}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- New Transfer -->
+                        <Button x:Name="NewTransferButton"
+                               Style="{StaticResource MaterialDesignFlatButton}"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Left"
+                               Padding="16,12"
+                               Click="NavigationButton_Click"
+                               Tag="NewTransfer">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Plus" 
+                                                       Width="20" Height="20" 
+                                                       Margin="0,0,16,0"/>
+                                <TextBlock Text="{Binding NewTransferText}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Agents -->
+                        <Button x:Name="AgentsButton"
+                               Style="{StaticResource MaterialDesignFlatButton}"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Left"
+                               Padding="16,12"
+                               Click="NavigationButton_Click"
+                               Tag="Agents">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountGroup" 
+                                                       Width="20" Height="20" 
+                                                       Margin="0,0,16,0"/>
+                                <TextBlock Text="{Binding AgentsText}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Reports -->
+                        <Button x:Name="ReportsButton"
+                               Style="{StaticResource MaterialDesignFlatButton}"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Left"
+                               Padding="16,12"
+                               Click="NavigationButton_Click"
+                               Tag="Reports">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ChartLine" 
+                                                       Width="20" Height="20" 
+                                                       Margin="0,0,16,0"/>
+                                <TextBlock Text="{Binding ReportsText}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Exchange Rates -->
+                        <Button x:Name="ExchangeRatesButton"
+                               Style="{StaticResource MaterialDesignFlatButton}"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Left"
+                               Padding="16,12"
+                               Click="NavigationButton_Click"
+                               Tag="ExchangeRates">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="CurrencyExchange" 
+                                                       Width="20" Height="20" 
+                                                       Margin="0,0,16,0"/>
+                                <TextBlock Text="{Binding ExchangeRatesText}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Users -->
+                        <Button x:Name="UsersButton"
+                               Style="{StaticResource MaterialDesignFlatButton}"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Left"
+                               Padding="16,12"
+                               Click="NavigationButton_Click"
+                               Tag="Users"
+                               Visibility="{Binding IsAdminVisible, Converter={x:Static BooleanToVisibilityConverter.Instance}}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Account" 
+                                                       Width="20" Height="20" 
+                                                       Margin="0,0,16,0"/>
+                                <TextBlock Text="{Binding UsersText}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Settings -->
+                        <Button x:Name="SettingsButton"
+                               Style="{StaticResource MaterialDesignFlatButton}"
+                               HorizontalAlignment="Stretch"
+                               HorizontalContentAlignment="Left"
+                               Padding="16,12"
+                               Click="NavigationButton_Click"
+                               Tag="Settings">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Settings" 
+                                                       Width="20" Height="20" 
+                                                       Margin="0,0,16,0"/>
+                                <TextBlock Text="{Binding SettingsText}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </materialDesign:ColorZone>
+
+            <!-- Content Area -->
+            <ContentControl x:Name="ContentArea" 
+                           Grid.Column="1" 
+                           Margin="16"/>
+
+        </Grid>
+    </Grid>
+</Window>
